@@ -15,6 +15,7 @@ Vue.use(require("vue-allpyra"));
   ```html
   <img v-src="'xx.jpg'" />
   ```
+  
 ### filter
 
 * proItemUrl  #商品详情链接
@@ -28,4 +29,31 @@ Vue.use(require("vue-allpyra"));
   
   ```html
   <ajaxloading></ajaxloading>
+  ```
+
+* pager 分页组件
+ - on-data 返回promise，返回结果必须是统一的分页数据格式，目前服务器有些接口并不符合，发现了就通知后台更改
+ - model.sync 内容绑定的model，必须是双向绑定。
+ 
+  ```html
+  <pager :on-data="getData" :model.sync="list">
+    <div v-for="item in list"></div>
+  </pager>
+  <script>
+    export default{
+        data(){
+            return {
+                list: [],
+            }
+        }
+        methods: {
+            getData({pageNo,pageSize}){
+                return this.$http.post("/api/XXX", {
+                    pageNo: pageNo,
+                    pageSize: pageSize,
+                });
+            },
+        }
+    }
+</script>
   ```
