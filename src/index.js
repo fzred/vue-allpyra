@@ -4,7 +4,7 @@
  * 依赖于 vue-resource Vue需要提前Install
  */
 function install(Vue, options) {
-    options = _extend({
+    options = _.extend({
         isFlexible: true,
     }, options || {});
 
